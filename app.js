@@ -17,7 +17,7 @@ app.use(express.urlencoded({
 app.use(express.static('public'));
 
 // Definir puerto
-const port = process.env.PORT || 4000;
+const port = process.env.PORT || 3000;
 
 // Habilitar pug
 app.set('view engine', 'pug');
