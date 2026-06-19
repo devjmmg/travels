@@ -1,0 +1,30 @@
+{
+  "name": "app-trips",
+  "version": "1.0.0",
+  "description": "Primer proyecto con Node",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/devjmmg"
+  },
+  "license": "ISC",
+  "author": "Juan Manuel Martínez García",
+  "type": "module",
+  "main": "app.js",
+  "scripts": {
+    "dev": "nodemon app.js",
+    "css": "npx @tailwindcss/cli -i ./src/css/input.css -o ./public/css/app.css --watch",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@tailwindcss/cli": "^4.3.0",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "mysql2": "^3.22.5",
+    "pug": "^3.0.4",
+    "sequelize": "^6.37.8",
+    "tailwindcss": "^4.3.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
+}

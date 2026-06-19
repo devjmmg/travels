@@ -1,0 +1,50 @@
+extends ../layout/app
+
+block content
+
+    h1.text-center #{page}
+
+    // Testimoniales
+    if testimonials.length
+        section(class="mt-12 max-w-5xl mx-auto")
+            h2.text-3xl.font-bold.text-center Últimos Testimoniales
+
+            div(class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8")
+                each testimonial in testimonials.slice(0, 6)
+                    div(class=" bg-white rounded-xl shadow-md p-6 hover:shadow-xl transition duration-300")
+                        .flex.items-center.gap-4.mb-4
+                            .w-12.h-12.rounded-full.bg-blue-500.flex.items-center.justify-center.text-white.font-bold.text-lg
+                                = testimonial.name.charAt(0).toUpperCase()
+
+                            div
+                                h3.font-semibold.text-gray-800= testimonial.name
+                                p.text-sm.text-gray-500= testimonial.email
+
+                        p.text-gray-600.leading-relaxed
+                            | "#{testimonial.message}"
+
+    main(class="max-w-5xl mx-auto mt-5")
+        
+        h2.text-center Agregar un testimonial
+        form(action="/testimonials" method="POST")
+            div 
+                label(for="name", class="block") Nombre:
+                input(type="text", class="w-full mt-1 bg-gray-100 p-3 rounded", id="name", name="name", placeholder="Escribe tu nombre", value=name)
+                if errors && errors.name
+                    p.text-red-500.mt-1 #{errors.name}
+
+            
+            div.mt-3
+                label.block(for="email") Correo electrónico:
+                input(type="text", id="email", name="email", placeholder="Escribe tu nombre", class="w-full mt-1 bg-gray-100 p-3 rounded", value=email)
+                if errors && errors.email 
+                    p.text-red-500.mt-1 #{errors.email}
+            
+            div.mt-3 
+                label.block(for="message") Mensaje:
+                textarea(id="message", name="message", placeholder="Escribe tu nombre", class="w-full h-40 mt-1 bg-gray-100 p-3 rounded") #{message}
+                if errors && errors.message
+                    p.text-red-500.mt-1 #{errors.message}
+
+            div.mt-3.flex.justify-end
+                button(class="bg-blue-500 hover:bg-blue-600 cursor-pointer transition duration-300 ease-linear text-white p-3 rounded") Agregar

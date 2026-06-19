@@ -1,0 +1,70 @@
+extends ../layout/app
+
+block hero
+    .slider
+        h1 Rio de Janeiro
+        em Aventura
+
+block content
+    main(class="max-w-5xl mx-auto mt-5")
+        h2.text-right.mt-10 Sobre Nosotros
+            .grid.grid-cols-2.gap-5.justify-center.items-center.text-left.mt-5
+                div 
+                    p ipsum dolor sit amet, consectetur adipiscing elit. Ut iaculis ac erat id congue. Vestibulum at turpis in arcu consequat luctus sed at elit. Praesent dictum, nisi nec imperdiet ullamcorper, purus elit lobortis felis, in iaculis dolor tellus a mi. Sed laoreet rutrum dolor in fermentum. Sed porttitor consequat ipsum ac elementum. Aenean nec elit vel dolor sodales dictum nec ac libero.
+                    p varius non arcu nec pellentesque. Morbi nibh magna, interdum non ex tristique, hendrerit molestie leo. Nam venenatis mattis risus in hendrerit. Curabitur eget odio scelerisque, molestie velit quis, blandit justo. Donec eget dui sem. Nunc lectus erat, tempus sed risus at, convallis pulvinar est. Vivamus rhoncus ipsum eget molestie tincidunt. Donec rutrum enim nec nulla euismod.
+                img(src="/img/inicio_nosotros.jpg", alt="Sobre nosotros")
+    
+    section(class="max-w-5xl mx-auto mt-5")
+        h2.text-left.mt-10 Viajes
+        .grid.grid-cols-3.proximos-viajes.gap-5.text-center
+            each travel in travels
+                div 
+                    img(src=`/img/destinos_${travel.imagen}.jpg`, alt=`Imagen ${travel.imagen}`)
+                    h2.my-4= travel.titulo
+                    p.flex.gap-3.items-center.my-3
+                        svg(xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewbox='0 0 24 24' fill='none' stroke='#2196f3' stroke-width='1.75' stroke-linecap='round' stroke-linejoin='round')
+                            path(d='M10.5 21h-4.5a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v3')
+                            path(d='M16 3v4')
+                            path(d='M8 3v4')
+                            path(d='M4 11h10')
+                            path(d='M18 18m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0')
+                            path(d='M18 16.5v1.5l.5 .5')
+                        
+                        | #{travel.fecha_ida} - #{travel.fecha_vuelta}
+                    p.flex.gap-3.items-center.my-3
+                        svg(xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewbox='0 0 24 24' fill='none' stroke='#2196f3' stroke-width='1.75' stroke-linecap='round' stroke-linejoin='round')
+                            path(d='M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0')
+                            path(d='M6 21v-2a4 4 0 0 1 4 -4h4')
+                            path(d='M15 19l2 2l4 -4')
+                        
+                        | #{travel.disponibles} Disponibles.
+                    p.flex.gap-3.items-center.my-3
+                        | #{travel.descripcion.substring(0,300) + '...'}
+                    a(href=`travels/${travel.slug}`, class="text-center bg-blue-500 p-2 text-white rounded hover:bg-blue-600 transition-colors duration-300 ease-linear w-full block")
+                        | Más información
+    .descuento.mt-10
+        .max-w-5xl.mx-auto
+            .grid-cols-2.gap-5
+                .contenido
+                    h3 5% Descuento
+                    p.titulo.mt-3 Viaje a Canada
+                    p.fecha.mt-3 2 de Diciembre de #{year} - 9 de Diciembre de #{year}
+                    p.precio.mt-3 $2,500 Dolares
+
+    .max-w-5xl.mx-auto.mt-10
+        h2.text-right Testimoniales
+        if testimonials.length
+            div(class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8")
+                each testimonial in testimonials.slice(0, 6)
+                    div(class=" bg-white rounded-xl shadow-md p-6 hover:shadow-xl transition duration-300")
+                        .flex.items-center.gap-4.mb-4
+                            .w-12.h-12.rounded-full.bg-blue-500.flex.items-center.justify-center.text-white.font-bold.text-lg
+                                = testimonial.name.charAt(0).toUpperCase()
+
+                            div
+                                h3.font-semibold.text-gray-800= testimonial.name
+                                p.text-sm.text-gray-500= testimonial.email
+
+                        p.text-gray-600.leading-relaxed
+                            | "#{testimonial.message}"
+        
